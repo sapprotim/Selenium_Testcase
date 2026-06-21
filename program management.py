@@ -9,10 +9,10 @@ import os
 def org_login():
     driver = webdriver.Chrome()
     driver.maximize_window()
-    driver.get("https://hpb-dev.connectedlife.io/#/login")
+    driver.get(os.environ.get("TEST_URL", ""))
     driver.implicitly_wait(100)
-    driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys("clhadmins+dev@connectedlife.io")
-    driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys("OrgAdmin@123!")
+    driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys(os.environ.get("TEST_EMAIL", ""))
+    driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys(os.environ.get("TEST_PASSWORD", ""))
     driver.find_element(By.XPATH, "//input[@value='Sign In']").click()
     time.sleep(5)
     otp = 111222

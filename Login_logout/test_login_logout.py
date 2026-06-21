@@ -81,7 +81,7 @@ def pytest_runtest_makereport(item, call):
 
 def test_login_with_invalid_user(login, take_screenshot):
     driver = login
-    driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys("clhstms+clh@connectedlife.i")
+    driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys(os.environ.get("INVALID_TEST_EMAIL", "invalid_user@example.com"))
     driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys(facility_pass)
     driver.find_element(By.XPATH, "//input[@value='Sign In']").click()
     message = driver.find_element(By.XPATH, "//*[@id='loginForm']/div[3]").text
@@ -94,7 +94,7 @@ def test_login_with_invalid_user(login, take_screenshot):
 def test_login_with_invalid_password(login, take_screenshot):
     driver = login
     driver.find_element(By.XPATH, "//div[@class='login-form']//div[1]//label[1]").send_keys(facility_userid)
-    driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys("CoLifeUatSTM@123")
+    driver.find_element(By.XPATH, "//div[@class='divisions']//div[2]//label[1]//input[1]").send_keys(os.environ.get("INVALID_TEST_PASSWORD", "wrong_password"))
     driver.find_element(By.XPATH, "//input[@value='Sign In']").click()
     message = driver.find_element(By.XPATH, "//*[@id='loginForm']/div[3]").text
     assert message == "Incorrect username or password. Please try again."
